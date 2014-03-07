@@ -1,9 +1,11 @@
 'use strict'
 
-angular.module('mirthRestPatientQuerierApp')
-  .controller 'MainCtrl', ($scope) ->
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate'
-      'AngularJS'
-      'Karma'
-    ]
+module = angular.module('mirthRestPatientQuerierApp')
+
+module.controller 'MainCtrl', ($scope) ->
+	
+    $scope.submitPatientQuery = ->
+    	#$scope.patient = angular.copy(patient)
+    	console.log "hello?"
+    	#resource = $resource($scope.restURL, { 'get': { method: 'GET', isArray: false }, 'update': { method: 'PUT'} })
+    	#console.log resource.get()
