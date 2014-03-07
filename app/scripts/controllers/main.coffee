@@ -2,10 +2,20 @@
 
 module = angular.module('mirthRestPatientQuerierApp')
 
-module.controller 'MainCtrl', ($scope) ->
-	
-    $scope.submitPatientQuery = ->
-    	#$scope.patient = angular.copy(patient)
-    	console.log "hello?"
-    	#resource = $resource($scope.restURL, { 'get': { method: 'GET', isArray: false }, 'update': { method: 'PUT'} })
-    	#console.log resource.get()
+module.controller 'MainCtrl', ($scope, $filter, $resource) ->
+	$scope.results = new Array()
+	$scope.submitPatientQuery = (patient) ->
+		return false unless $scope.restURL
+		
+		if patient.dateOfBirth
+			patient.dateOfBirth = $filter('date')(patient.dateOfBirth, 'mediumDate');
+			
+		$scope.patient = angular.copy(patient)
+		
+		myresource = $resource($scope.restURL, patient , { 'get': { method: 'GET', isArray: true } })
+		myresource.get().$promise.then( (data) ->
+				$scope.results = data
+			, (error) ->
+				console.log "fails"
+				console.log error
+		)

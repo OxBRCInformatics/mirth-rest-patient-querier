@@ -15,7 +15,7 @@
 <div class="row">
 <form role="form">
  
-<div class="col-md-3">
+<div class="col-md-4">
   <div class="form-group">
     <label for="firstName">First name</label>
     <input type="text" class="form-control" id="firstName" placeholder="First name" ng-model="patient.firstName">
@@ -29,40 +29,71 @@
     <input type="text" class="form-control" id="lastName" placeholder="Last name" ng-model="patient.lastName">
   </div>
 </div>
-<div class="col-md-3">
+<div class="col-md-4">
   <div class="form-group">
     <label for="dateOfBirth">D.O.B.</label>
-    <input type="text" class="form-control" id="dateOfBirth" placeholder="D.O.B" ng-model="patient.dateOfBirth">
+    <input type="date" class="form-control" id="dateOfBirth" placeholder="D.O.B" ng-model="patient.dateOfBirth">
   </div>
   <div class="form-group">
     <label for="gender">Gender</label>
     <input type="text" class="form-control" id="gender" placeholder="Gender" ng-model="patient.gender">
   </div>
 </div>
-<div class="col-md-3">
-street1
-street2
-city
-state
-zipCode
-<input type="text" class="form-control" id="restURL" placeholder="REST endpoint URL" ng-model="restURL">
-<button type="button" class="btn btn-default" ng-click="submitPatientQuery()">Submit</button>
+<div class="col-md-4">
+    <div class="form-group">
+      <label for="street1">Street 1</label>
+      <input type="text" class="form-control" id="street1" placeholder="Street 1" ng-model="patient.street1">
+    </div>
+    <div class="form-group">
+      <label for="street2">Street 2</label>
+      <input type="text" class="form-control" id="street2" placeholder="Street 2" ng-model="patient.street2">
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" class="form-control" id="city" placeholder="City" ng-model="patient.city">
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" class="form-control" id="state" placeholder="State" ng-model="patient.state">
+    </div>
+    <div class="form-group">
+      <label for="zipCode">Zipcode/Postcode</label>
+      <input type="text" class="form-control" id="zipCode" placeholder="Zipcode/Postcode" ng-model="patient.zipCode">
+    </div>
 </div>
 </form>
 </div>
 <div class="row">
-  <div class="col-xs-12">
-    
-  </div>
+	<div class="col-xs-9">
+	  <input type="text" class="form-control" id="restURL" placeholder="REST endpoint URL" ng-model="restURL">
+  	</div>
+	<div class="col-xs-3">
+		<button type="button" class="btn btn-primary btn-block" ng-click="submitPatientQuery(patient)">Submit</button>
+  	</div>
 </div>
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-12">
 <h4>Patient query result</h4>
-Queried from: {{restURL || 'empty'}} <br>
-Patient key: {{subjectKey || 'empty'}}
+Returned {{ results.length }} results from: {{restURL || 'empty'}} <br>
+
+	<table class="table">
+		<thead></thead>
+		<tbody>
+			<tr ng-repeat="subject in results">
+				<td>{{subject.subjectKey}}</td>
+				<td>
+					<ul>
+						<li ng-repeat="name in subject.names">
+							{{name.first}} {{name.last}}
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div> 
 </div>
 
 <div class="footer">
-  <p>♥ from the Yeoman team</p>
+  <p>♥ from Ryan Brooks and the Oxford BRC team</p>
 </div>
