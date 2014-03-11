@@ -3,6 +3,34 @@ mirth-rest-patient-querier
 
 A tool to query the MirthResults REST API.
 
+# Contributing
+
+Pull requests, issues and general interest is always welcome. If you find this project useful let us know!
+
+## Pre-requisites
+
+* Git
+* NodeJS (& NPM package manager)
+* Compass
+
+## Installing the dependencies
+
+Dependencies are managed with Bower and Node packages. To get everything you need just run
+
+```bash
+npm install
+bower install
+```
+
+If you have any problems running bower you can install it globally using
+
+```bash
+npm install bower
+```
+
+## Running a test instance
+
+This project is built with Grunt. You can fire up a simple web server for local development with `grunt server`.
 
 # License
 
