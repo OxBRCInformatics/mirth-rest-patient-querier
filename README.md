@@ -9,9 +9,11 @@ Pull requests, issues and general interest is always welcome. If you find this p
 
 ## Pre-requisites
 
+The tools used for development are compatible with Windows, OSX and other Unix variants.
+
 * Git
 * NodeJS (& NPM package manager)
-* Compass
+* Compass (can be installed with `gem install compass`
 
 ## Installing the dependencies
 
