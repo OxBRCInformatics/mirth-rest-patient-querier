@@ -13,7 +13,7 @@ The tools used for development are compatible with Windows, OSX and other Unix v
 
 * Git
 * NodeJS (& NPM package manager)
-* Compass (can be installed with `gem install compass`
+* Compass (can be installed with `gem install compass`)
 
 ## Installing the dependencies
 
