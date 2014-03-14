@@ -76,21 +76,22 @@
 <h4>Patient query result</h4>
 Returned {{ results.length }} results from: {{restURL || 'empty'}} <br>
 
-	<table class="table">
-		<thead></thead>
-		<tbody>
-			<tr ng-repeat="subject in results">
-				<td>{{subject.subjectKey}}</td>
-				<td>
-					<ul>
-						<li ng-repeat="name in subject.names">
-							{{name.first}} {{name.last}}
-						</li>
-					</ul>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+<table ng-table="tableParams" class="table">
+	<thead></thead>
+	<tbody>
+        <tr ng-repeat="subject in $data">
+			<td>{{subject.subjectKey}}</td>
+			<td>
+				<ul>
+					<li ng-repeat="name in subject.names">
+						{{name.first}} {{name.last}}
+					</li>
+				</ul>
+			</td>
+		</tr>
+	<tbody>
+</table>
+
 </div> 
 </div>
 

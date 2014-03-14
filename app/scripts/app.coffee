@@ -5,7 +5,8 @@ angular.module('mirthRestPatientQuerierApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ngResource'
+  'ngResource',
+  'ngTable'
 ])
   .config ($routeProvider) ->
     $routeProvider
