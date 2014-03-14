@@ -3,6 +3,12 @@
 module = angular.module('mirthRestPatientQuerierApp')
 
 module.controller 'MainCtrl', ($scope, $filter, $resource) ->
+	
+	$scope.restURL = localStorage.restURL
+	$scope.$watch('restURL', ->
+		if $scope.restURL then localStorage.restURL = $scope.restURL
+	)
+	
 	$scope.results = new Array()
 	$scope.submitPatientQuery = (patient) ->
 		return false unless $scope.restURL
@@ -19,3 +25,5 @@ module.controller 'MainCtrl', ($scope, $filter, $resource) ->
 				console.log "fails"
 				console.log error
 		)
+		
+		
