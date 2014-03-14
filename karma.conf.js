@@ -1,56 +1,91 @@
-// Karma configuration
-// http://karma-runner.github.io/0.10/config/configuration-file.html
-
+// an example karma.conf.js
 module.exports = function(config) {
-  config.set({
-    // base path, that will be used to resolve files and exclude
-    basePath: '',
+	config.set({
+		basePath: '.',
+		frameworks: ['jasmine'],
 
-    // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['jasmine'],
+		browsers: [
+            'Chrome',
+            //'Firefox', // Firefox is slow!
+            //'Safari'
+        ],
+		reporters: ['progress', 'junit', 'coverage', 'osx'],
+		singleRun: false,
+        autoWatch : true,
 
-    // list of files / patterns to load in the browser
-    files: [
-      'app/bower_components/angular/angular.js',
-      'app/bower_components/angular-mocks/angular-mocks.js',
-      'app/bower_components/angular-resource/angular-resource.js',
-      'app/bower_components/angular-cookies/angular-cookies.js',
-      'app/bower_components/angular-sanitize/angular-sanitize.js',
-      'app/bower_components/angular-route/angular-route.js',
-      'app/scripts/*.coffee',
-      'app/scripts/**/*.coffee',
-      'test/mock/**/*.coffee',
-      'test/spec/**/*.coffee'
-    ],
+		coverageReporter: {
+			type: 'lcovonly',
+			dir: 'target/reports/js/coverage/'
+		},
 
-    // list of files / patterns to exclude
-    exclude: [],
+		junitReporter: {
+			outputFile: 'target/reports/js/karma-test-results.xml',
+            suite: 'unit'
+		},
+		
+		files: [
+	
+			  // Load dependencies
+		      'app/bower_components/angular/angular.js',
+		      'app/bower_components/angular-resource/angular-resource.js',
+		      'app/bower_components/angular-cookies/angular-cookies.js',
+		      'app/bower_components/angular-sanitize/angular-sanitize.js',
+		      'app/bower_components/angular-route/angular-route.js',
+		      'app/bower_components/ng-table/ng-table.js',
+	  
+			  // Load the app (our code)
+		      'app/scripts/!(*.spec).coffee',
+		      'app/scripts/**/!(*.spec).coffee',
+	  
+			  // Load mocks
+		      'app/bower_components/angular-mocks/angular-mocks.js',
+		      'test/mock/**/*.coffee',
+	  
+			  // Finally, load our tests
+		      'app/scripts/**/*.spec.coffee',
+		      'test/spec/**/*.coffee'
 
-    // web server port
-    port: 8080,
+		    ],
+		exclude: [
+		],
 
-    // level of logging
-    // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO,
+		plugins: [
+			'karma-coverage',
+			'karma-jasmine',
+			'karma-chrome-launcher',
+			'karma-firefox-launcher',
+			'karma-safari-launcher',
+			'karma-junit-reporter',
+            'karma-coffee-preprocessor',
+            'karma-ng-html2js-preprocessor',
+            'karma-osx-reporter'
+		],
 
+        preprocessors: {
+            '**/*.coffee': ['coffee'],
+            '**/*.html': ['ng-html2js']
+        },
 
-    // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+        coffeePreprocessor: {
+            // options passed to the coffee compiler
+            options: {
+                bare: true,
+                sourceMap: false
+            },
+            // transforming the filenames
+            transformPath: function(path) {
+                return path.replace(/\.js$/, '.coffee');
+            }
+        },
 
-
-    // Start these browsers, currently available:
-    // - Chrome
-    // - ChromeCanary
-    // - Firefox
-    // - Opera
-    // - Safari (only Mac)
-    // - PhantomJS
-    // - IE (only Windows)
-    browsers: ['Chrome'],
-
-
-    // Continuous Integration mode
-    // if true, it capture browsers, run tests and exit
-    singleRun: false
-  });
+        /**
+         * Angular template loader.
+         * see http://daginge.com/technology/2013/12/14/testing-angular-templates-with-jasmine-and-karma/
+         */
+        ngHtml2JsPreprocessor: {
+            moduleName: 'templates',
+            stripPrefix: 'grails-app/assets/javascripts/',
+            prependPrefix:'/model_catalogue/assets/'
+        }
+	});
 };

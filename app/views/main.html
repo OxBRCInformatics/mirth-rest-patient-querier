@@ -1,11 +1,4 @@
-<div class="header">
-  <ul class="nav nav-pills pull-right">
-    <li class="active"><a ng-href="#">Home</a></li>
-    <li><a ng-href="#about">About</a></li>
-    <li><a ng-href="#">Contact</a></li>
-  </ul>
-  <h3 class="text-muted">Mirth rest patient querier</h3>
-</div>
+
 
 <div class="row">
   <div class="col-xs-12">
@@ -88,6 +81,8 @@ Returned {{ results.length }} results from: {{restURL || 'empty'}} <br>
 					</li>
 				</ul>
 			</td>
+			<td>
+				<a href="#patient/{{subject.subjectKey}}" class="btn btn-default">View patient</a>
 		</tr>
 	<tbody>
 </table>
@@ -95,6 +90,3 @@ Returned {{ results.length }} results from: {{restURL || 'empty'}} <br>
 </div> 
 </div>
 
-<div class="footer">
-  <p>♥ from Ryan Brooks and the Oxford BRC team</p>
-</div>

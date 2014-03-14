@@ -2,7 +2,7 @@
 
 module = angular.module('mirthRestPatientQuerierApp')
 
-module.controller 'MainCtrl', ($scope, $filter, $resource, ngTableParams) ->
+module.controller 'MainCtrl', ($scope, $filter, $resource, ngTableParams, MirthResultsService) ->
 	
 	$scope.restURL = localStorage.restURL
 	$scope.$watch('restURL', ->
@@ -23,18 +23,24 @@ module.controller 'MainCtrl', ($scope, $filter, $resource, ngTableParams) ->
 	$scope.submitPatientQuery = (patient) ->
 		return false unless $scope.restURL
 		
+		MirthResultsService.setApiUrl($scope.restURL)
 		if patient && patient.dateOfBirth
 			patient.dateOfBirth = $filter('date')(patient.dateOfBirth, 'mediumDate');
 			
 		$scope.patient = angular.copy(patient)
 		
-		myresource = $resource($scope.restURL, patient , { 'get': { method: 'GET', isArray: true } })
-		myresource.get().$promise.then( (data) ->
+		MirthResultsService.getPatients(patient).$promise.then( (data) ->
 				$scope.results = data
-				$scope.tableParams.reload();
+				$scope.tableParams.reload()
 			, (error) ->
 				console.log "fails"
 				console.log error
 		)
+		# on success: 
+		
+	$scope.goToPatient = (subject) ->
+		
+module.controller 'PatientDetailCtrl', ($scope) ->
+	
 		
 		

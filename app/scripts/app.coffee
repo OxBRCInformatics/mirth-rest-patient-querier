@@ -6,14 +6,18 @@ angular.module('mirthRestPatientQuerierApp', [
   'ngSanitize',
   'ngRoute',
   'ngResource',
-  'ngTable'
+  'ngTable',
+  'MirthResults'
 ])
-  .config ($routeProvider) ->
-    $routeProvider
-      .when '/',
-        templateUrl: 'views/main.html'
-        controller: 'MainCtrl'
-      .when '/about',
-        templateUrl: 'views/about.html'
-      .otherwise
-        redirectTo: '/'
+	.config ($routeProvider) ->
+		$routeProvider
+			.when '/',
+				templateUrl: 'views/main.html'
+				controller: 'MainCtrl'
+			.when '/patient/:id',
+				templateUrl: 'views/patient.html'
+				controller: 'PatientDetailCtrl'
+			.when '/about',
+				templateUrl: 'views/about.html'
+			.otherwise
+				redirectTo: '/'
